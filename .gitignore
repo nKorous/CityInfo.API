@@ -1,0 +1,8 @@
+#folders
+logs
+bin
+
+#files
+CityInfo.db
+CityInfo.db-shm
+CityInfo.db-wal

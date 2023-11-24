@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="8.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.1" />
+    <PackageReference Include="microsoft.entityframeworkcore" Version="6.0.0" />
+    <PackageReference Include="microsoft.entityframeworkcore.sqlite" Version="6.0.0" />
+    <PackageReference Include="microsoft.entityframeworkcore.tools" Version="6.0.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Serilog.aspnetcore" Version="8.0.0" />
+    <PackageReference Include="Serilog.sinks.console" Version="5.0.0" />
+    <PackageReference Include="Serilog.sinks.file" Version="5.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" /> <!-- OpenAPI, formerly SWAGGER -->
+  </ItemGroup>
+
+</Project>
