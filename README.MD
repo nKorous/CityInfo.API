@@ -11,8 +11,9 @@ Created by following along with Pluralsight **ASP.NET Core 6 Web API Fundamental
 ### Install dependencies
 `dotnet restore`
 
+### Create/update Database through Migrations
+`dotnet ef database update`
+
 ### Run
 `dotnet run`
 
-### Create Database through Migrations
-`dotnet ef database update`
