@@ -14,7 +14,7 @@ namespace CityInfo.API.Entities
         public string Name { get; set; }
 
         [MaxLength(200)]
-        public string Description { get; set;}
+        public string? Description { get; set;}
         
         public City? City { get; set; } // Foreign key to City table; convention based
 
