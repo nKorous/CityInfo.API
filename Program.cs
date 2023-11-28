@@ -1,6 +1,7 @@
 using CityInfo.API;
 using CityInfo.API.DbContexts;
 using CityInfo.API.Service;
+using CityInfo.API.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
@@ -44,6 +45,8 @@ builder.Services.AddSingleton<CitiesDataStore>(); // This is our DI CitiesDataSt
 
 builder.Services.AddDbContext<CityInfoContext>(
     dbContextOptions => dbContextOptions.UseSqlite(builder.Configuration["ConnectionStrings:CityInfoDBConnectionString"]));
+
+builder.Services.AddScoped<ICityInfoRepository, CityInfoRepository>(); // This is how we inject the repository
 
 var app = builder.Build(); // Once registered, the webApp can be built
 
