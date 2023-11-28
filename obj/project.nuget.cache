@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "szvqjNBDSzYzL0VmWO83M7LN6wZcIYAT4yb/LOWb9G1HXtGCZyJjQsdHGtNlvQrKE/+5RRjUHzxqu8QBcXwdRA==",
+  "dgSpecHash": "VxknqqQLA7GlYCHJ384RZkA6WxNMH5/ROtCUzzJyoxHJKxjBM458+S/KHPTyASWYt5yv6Rzw8iJfx8uE8kCWcA==",
   "success": true,
   "projectFilePath": "C:\\Users\\natha\\projects\\CityInfo.API\\CityInfo.API.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\natha\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
+    "C:\\Users\\natha\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
     "C:\\Users\\natha\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\natha\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\8.0.0\\microsoft.aspnetcore.jsonpatch.8.0.0.nupkg.sha512",
     "C:\\Users\\natha\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\6.0.1\\microsoft.aspnetcore.mvc.newtonsoftjson.6.0.1.nupkg.sha512",
@@ -55,6 +57,7 @@
     "C:\\Users\\natha\\.nuget\\packages\\system.collections.immutable\\6.0.0\\system.collections.immutable.6.0.0.nupkg.sha512",
     "C:\\Users\\natha\\.nuget\\packages\\system.diagnostics.diagnosticsource\\8.0.0\\system.diagnostics.diagnosticsource.8.0.0.nupkg.sha512",
     "C:\\Users\\natha\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
+    "C:\\Users\\natha\\.nuget\\packages\\system.reflection.emit\\4.7.0\\system.reflection.emit.4.7.0.nupkg.sha512",
     "C:\\Users\\natha\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "C:\\Users\\natha\\.nuget\\packages\\system.text.encodings.web\\8.0.0\\system.text.encodings.web.8.0.0.nupkg.sha512",
     "C:\\Users\\natha\\.nuget\\packages\\system.text.json\\8.0.0\\system.text.json.8.0.0.nupkg.sha512"

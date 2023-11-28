@@ -48,6 +48,8 @@ builder.Services.AddDbContext<CityInfoContext>(
 
 builder.Services.AddScoped<ICityInfoRepository, CityInfoRepository>(); // This is how we inject the repository
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 var app = builder.Build(); // Once registered, the webApp can be built
 
 // Configure the HTTP request pipeline.
