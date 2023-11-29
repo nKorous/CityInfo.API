@@ -19,6 +19,34 @@ namespace CityInfo.API.Services
             return await _context.Cities.OrderBy(c => c.Name).ToListAsync(); // Returns the cities async in a list, ordered by Name
         }
 
+        public async Task<IEnumerable<City>> GetCitiesAsync(string? name, string? searchQuery)
+        {
+            if (string.IsNullOrEmpty(name) && string.IsNullOrWhiteSpace(searchQuery))
+            {
+                return await GetCitiesAsync();
+            }
+
+            /*** collection to start from. This allows us to add WHERE clauses when needed and makes it so we don't have to keep going back to the database.
+            *** This is called Deferred Execution.
+             ***/
+            var collection = _context.Cities as IQueryable<City>;
+
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                name = name.Trim();
+                collection = collection.Where(c => c.Name == name);
+            }
+
+            if (!string.IsNullOrWhiteSpace(searchQuery))
+            {
+                searchQuery = searchQuery.Trim();
+                collection = collection.Where(a => a.Name.Contains(searchQuery)
+                    || (a.Description != null && a.Description.Contains(searchQuery)));
+            }
+
+            return await collection.OrderBy(c => c.Name).ToListAsync();
+        }
+
         public async Task<City?> GetCityAsync(int cityId, bool includePointsOfInterest)
         {
             if (includePointsOfInterest)
@@ -54,7 +82,7 @@ namespace CityInfo.API.Services
                 city.PointsOfInterest.Add(pointOfInterest);
             }
         }
-        
+
         public void DeletePointOfInterest(PointOfInterest pointOfInterest)
         {
             _context.PointsOfInterest.Remove(pointOfInterest);

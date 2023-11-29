@@ -8,6 +8,7 @@ namespace CityInfo.API.Services
         // Can do an IEnumerable or IQueryable here
         // Async methods are usually suffixed with Async and return a Task<T>
         Task<IEnumerable<City>> GetCitiesAsync();
+        Task<IEnumerable<City>> GetCitiesAsync(string? name, string? searchQuery);
 
         Task<City?> GetCityAsync(int cityId, bool includePointsOfInterest);
 
