@@ -69,9 +69,9 @@ namespace CityInfo.API.Controllers
             return CreatedAtRoute("GetCity",
             new
             {
-                Id = createdCityToReturn.Id,
-                Name = createdCityToReturn.Name,
-                Description = createdCityToReturn.Description
+                createdCityToReturn.Id,
+                createdCityToReturn.Name,
+                createdCityToReturn.Description
             },
             createdCityToReturn
             );
