@@ -95,7 +95,92 @@ namespace CityInfo.API.Controllers
             );
         }
 
-        
+        [HttpPut("{pointOfInterestId}")]
+        public async Task<ActionResult> UpdatePointOfInterest(int cityId, int pointOfInterestId, [FromBody] PointOfInterestForUpdateDto pointOfInterest)
+        {
+            if(!await _cityInfoRepository.CityExistsAsync(cityId))
+            {
+                logCityNotFound(cityId);
+
+                return NotFound();
+            }
+
+            var poiEntity = await _cityInfoRepository.GetPointOfInterestForCityAsync(cityId, pointOfInterestId);
+
+            if(poiEntity == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map(pointOfInterest, poiEntity);
+
+            await _cityInfoRepository.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpPatch("{pointOfInterestId}")]
+        public async Task<ActionResult> PartiallyUpdatePointOfInterest(int cityId, int pointOfInterestId, JsonPatchDocument<PointOfInterestForUpdateDto> patchDocument)
+        {
+            if(!await _cityInfoRepository.CityExistsAsync(cityId))
+            {
+                logCityNotFound(cityId);
+
+                return NotFound();
+            }
+
+            var poiEntity = await _cityInfoRepository.GetPointOfInterestForCityAsync(cityId, pointOfInterestId);
+
+            if(poiEntity == null) {
+                return NotFound();
+            }
+
+            var poiToPatch = _mapper.Map<PointOfInterestForUpdateDto>(poiEntity);
+
+            patchDocument.ApplyTo(poiToPatch, ModelState);
+
+            if(!ModelState.IsValid){
+                return BadRequest(ModelState);
+            }
+
+            if(!TryValidateModel(poiToPatch)){
+                return BadRequest(ModelState);
+            }
+
+            _mapper.Map(poiToPatch, poiEntity);
+
+            await _cityInfoRepository.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpDelete("{pointOfInterestId}")]
+        public async Task<ActionResult> DeletePointOfInterest(int cityId, int pointOfInterestId)
+        {
+            if(!await _cityInfoRepository.CityExistsAsync(cityId))
+            {
+                logCityNotFound(cityId);
+
+                return NotFound();
+            }
+
+            var poiEntity = await _cityInfoRepository.GetPointOfInterestForCityAsync(cityId, pointOfInterestId);
+
+            if(poiEntity == null) {
+                return NotFound();
+            }
+
+            _cityInfoRepository.DeletePointOfInterest(poiEntity);
+
+            await _cityInfoRepository.SaveChangesAsync();
+
+            _mailService.Send(
+                "Point of Interest Deleted from Database",
+                $"Point of Interest {poiEntity.Name} with id {poiEntity.Id} was removed from the database"
+            );
+
+            return NoContent();
+        }
 
         private void logCityNotFound(int cityId)
         {
