@@ -7,9 +7,9 @@ namespace CityInfo.API.Controllers
 {
     [ApiController]
     [Route("api/cities")] // Putting [controller] will match the name of the controller
-    
+
     /*** This is for the Entity Framework Core Repository approach ***/
-    public class CitiesController: ControllerBase
+    public class CitiesController : ControllerBase
     {
         private readonly ICityInfoRepository _cityInfoRepository;
         private readonly IMapper _mapper;
@@ -41,18 +41,40 @@ namespace CityInfo.API.Controllers
             // }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetCity")]
         public async Task<IActionResult> GetCity(int id, bool includePointsOfInterest = false)
         {
             var city = await _cityInfoRepository.GetCityAsync(id, includePointsOfInterest);
-            if(city == null)
+            if (city == null)
             {
                 return NotFound();
             }
-            
-            return includePointsOfInterest 
+
+            return includePointsOfInterest
                 ? Ok(_mapper.Map<CityDto>(city))
                 : Ok(_mapper.Map<CityWithoutPointsOfInterestDto>(city));
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<CityDto>> AddCity([FromBody] CityForCreationDto city)
+        {
+            var finalCity = _mapper.Map<Entities.City>(city);
+
+            _cityInfoRepository.AddCity(finalCity);
+
+            await _cityInfoRepository.SaveChangesAsync();
+
+            var createdCityToReturn = _mapper.Map<Models.CityDto>(finalCity);
+
+            return CreatedAtRoute("GetCity",
+            new
+            {
+                Id = createdCityToReturn.Id,
+                Name = createdCityToReturn.Name,
+                Description = createdCityToReturn.Description
+            },
+            createdCityToReturn
+            );
         }
     }
 

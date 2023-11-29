@@ -64,6 +64,11 @@ namespace CityInfo.API.Services
             return await _context.Cities.AnyAsync(c => c.Id == cityId); // Returns True if found or False if not
         }
 
+        public void AddCity(City city)
+        {
+            _context.Add(city);
+        }
+
         public async Task<PointOfInterest?> GetPointOfInterestForCityAsync(int cityId, int pointOfInterestId)
         {
             return await _context.PointsOfInterest.Where(p => p.Id == pointOfInterestId && p.CityId == cityId).FirstOrDefaultAsync();
